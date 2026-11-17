@@ -80,6 +80,42 @@
   #authActions button:disabled { opacity:.45; cursor:not-allowed; } #termsAgree { margin-top:12px; font-size:14px; }
   #accountBar { position:absolute; z-index:1200; top:10px; right:10px; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.96); padding:7px 9px; border-radius:8px; box-shadow:0 1px 5px #777; font-size:13px; }
   #signOutButton { background:#eee; } @media(max-width:520px){ #accountBar { top:54px; right:7px; } #authCard { padding:17px; } }
+
+  /* スマートフォン向け：投稿フォームをコンパクトにする */
+  @media (max-width: 520px) {
+    #formPanel {
+      max-height: 52dvh;
+      padding: 12px 12px calc(14px + env(safe-area-inset-bottom));
+      overscroll-behavior: contain;
+    }
+    #formPanel h2 { margin-bottom: 8px; font-size: 16px; }
+    .field { margin-bottom: 8px; }
+    .field label { font-size: 13px; }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      max-width: none;
+      padding: 9px 10px;
+      font-size: 16px;
+    }
+    .field textarea { height: 64px; }
+    .actions { gap: 6px; }
+    .actions button {
+      flex: 1 1 calc(50% - 6px);
+      min-height: 44px;
+      padding: 10px 8px;
+    }
+    #formToggle {
+      bottom: max(10px, env(safe-area-inset-bottom));
+      min-height: 44px;
+    }
+    #listPanel {
+      max-height: 34dvh;
+      padding: 8px;
+    }
+    #listPanel h2 { font-size: 14px; }
+    .pin-list-item { padding: 9px; }
+  }
+
 </style>
 </head>
 <body>
