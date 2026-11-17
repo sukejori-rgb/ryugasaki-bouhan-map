@@ -69,9 +69,42 @@
     #formPanel { left: 16px; right: auto; width: 380px; border-radius: 10px 10px 0 0; }
     .field input, .field textarea { max-width: 100%; }
   }
+
+  #authGate { position:fixed; inset:0; z-index:5000; display:flex; align-items:center; justify-content:center; padding:18px; background:rgba(15,25,20,.72); }
+  #authCard { width:min(620px,100%); max-height:90vh; overflow:auto; background:#fff; border-radius:14px; padding:22px; box-shadow:0 8px 35px rgba(0,0,0,.3); }
+  #authCard h2 { margin:0 0 12px; font-size:21px; } #authCard h3 { margin:16px 0 6px; font-size:16px; }
+  #authCard p,#authCard li { line-height:1.55; font-size:14px; } #authCard ul { padding-left:22px; }
+  #authActions { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+  #authActions button,#accountBar button { border:0; border-radius:7px; padding:10px 14px; font:inherit; cursor:pointer; }
+  #githubLogin { background:#176b45; color:#fff; } #guestContinue { background:#e9ecef; color:#222; }
+  #authActions button:disabled { opacity:.45; cursor:not-allowed; } #termsAgree { margin-top:12px; font-size:14px; }
+  #accountBar { position:absolute; z-index:1200; top:10px; right:10px; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.96); padding:7px 9px; border-radius:8px; box-shadow:0 1px 5px #777; font-size:13px; }
+  #signOutButton { background:#eee; } @media(max-width:520px){ #accountBar { top:54px; right:7px; } #authCard { padding:17px; } }
 </style>
 </head>
 <body>
+<div id="authGate" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div id="authCard">
+    <h2 id="authTitle">龍ケ崎市 防犯マップへようこそ</h2>
+    <p>このマップは、地域の防犯意識を高めるための情報共有を目的としています。利用前に、以下の説明と注意事項を確認してください。</p>
+    <h3>投稿者IDの利用について</h3>
+    <ul><li>ログインした利用者のIDを、投稿者の識別と編集・削除権限の確認に利用します。</li><li>投稿者IDはマップ上に公開しません。メールアドレスも投稿データには保存しません。</li><li>公開投稿の内容・場所は、マップを利用する人が閲覧できます。</li></ul>
+    <h3>利用上の注意</h3>
+    <ul>
+      <li>荒らし、いたずら、同じ内容の大量投稿をしないでください。</li>
+      <li>事実と異なる情報や、確認できていないうわさを投稿しないでください。</li>
+      <li>氏名、電話番号、個人宅を特定できる情報など、個人情報を投稿しないでください。</li>
+      <li>特定の人への誹謗中傷や、根拠なく犯罪者と決めつける内容を投稿しないでください。</li>
+      <li>防犯上の注意喚起に関係する情報を、分かりやすく正確に投稿してください。</li>
+      <li>不適切な投稿は、管理者によって編集・削除される場合があります。</li>
+      <li>このマップは緊急通報の代わりではありません。緊急時は警察・消防など適切な窓口へ連絡してください。</li>
+    </ul>
+    <label id="termsAgree"><input id="termsCheckbox" type="checkbox"> 上記の説明と利用上の注意を確認しました。</label>
+    <div id="authActions"><button id="githubLogin" type="button" disabled>GitHubアカウントでログイン</button><button id="guestContinue" type="button" disabled>ログインせずに閲覧</button></div>
+    <p id="authMessage" role="status">投稿・編集・自分専用ピンの利用にはログインが必要です。</p>
+  </div>
+</div>
+<div id="accountBar" style="display:none"><span id="accountLabel"></span><button id="signOutButton" type="button">ログアウト</button></div>
 <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 19; transform: translate3d(301px, 253px, 0px) scale(1);"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3642" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(32px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3642(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(32px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3641" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-224px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3643" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(288px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3641(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-224px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3643(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(288px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3642(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(32px, 229px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3643(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(288px, 229px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3644" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(544px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3644(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(544px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3641(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-224px, 229px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3644(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(544px, 229px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3640" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-480px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3645" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(800px, -27px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3640(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-480px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3645(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(800px, -283px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3640(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-480px, 229px, 0px); opacity: 1;"><img alt="" src="./龍ケ崎市 防犯マップ（共有投稿対応版）_files/3645(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(800px, 229px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1336" height="714" viewBox="-111 -59 1336 714" style="transform: translate3d(-111px, -59px, 0px);"><g><path stroke="none" fill="#ffffff" fill-opacity="0.68" fill-rule="evenodd" d="M1228 658L1228 -62L-114 -62L-114 658zM558 283L553 283L550 276L553 275L558 277L558 283zM425 501L430 496L425 485L425 478L429 474L435 477L439 487L442 488L446 486L453 478L461 477L464 475L470 467L494 468L492 460L492 462L491 460L490 463L488 460L495 457L496 458L498 456L495 453L492 455L493 454L483 452L486 444L488 444L489 435L491 436L491 432L484 430L482 416L479 409L473 405L463 406L450 392L440 389L433 377L421 371L419 359L421 356L422 348L425 347L429 349L433 342L433 338L436 334L436 330L428 327L434 313L419 300L409 295L393 278L373 263L354 251L337 244L332 240L323 229L323 226L314 209L316 208L310 198L308 197L304 178L307 177L303 155L310 153L307 144L308 143L311 150L314 168L316 168L317 173L317 181L314 188L313 198L317 205L319 205L329 212L329 214L342 233L345 242L358 252L360 251L369 255L371 251L372 255L376 258L387 263L400 272L405 272L407 270L403 265L396 262L388 256L384 249L386 237L384 231L368 211L370 201L372 201L373 163L360 137L362 127L356 125L356 123L352 121L339 108L335 99L330 95L330 92L324 87L320 79L323 64L327 56L332 55L332 53L336 57L334 70L334 80L336 85L348 99L348 104L379 138L380 149L385 159L384 185L386 191L384 200L386 203L386 210L392 216L393 223L401 233L405 233L413 229L413 226L415 224L417 228L420 229L419 236L417 236L418 242L425 252L433 256L436 260L445 261L451 266L453 266L456 270L467 274L474 280L478 281L485 289L489 288L495 282L501 267L508 257L509 248L506 242L510 244L529 267L541 275L554 294L558 314L554 321L557 325L558 323L558 327L560 323L564 321L566 314L570 308L568 302L585 274L583 274L583 270L585 268L584 265L590 258L592 252L590 246L592 240L600 239L605 242L611 250L612 249L613 231L617 221L615 209L618 209L628 213L638 225L647 229L658 237L674 242L688 252L699 263L710 270L722 270L739 267L755 268L768 280L776 284L792 297L794 302L794 311L797 318L804 325L809 333L804 338L794 337L788 340L785 344L783 355L779 361L775 382L773 385L772 400L769 400L768 404L774 407L772 418L756 424L757 426L752 429L751 428L740 432L736 435L736 443L717 449L699 466L699 470L685 475L677 480L678 481L674 484L675 486L672 487L675 492L674 493L676 498L672 500L673 501L670 502L670 504L667 506L660 508L664 519L652 524L642 514L639 517L634 516L631 518L632 520L627 522L636 534L620 542L605 523L606 522L599 510L596 508L598 507L596 504L589 497L593 493L587 484L578 491L576 489L574 491L569 485L563 491L555 489L555 486L547 487L548 491L535 491L531 488L531 490L527 490L524 493L526 493L524 499L523 498L523 503L525 504L519 517L503 517L501 515L492 514L490 516L478 516L472 518L468 516L468 513L457 513L457 511L455 511L454 514L451 513L450 515L440 516L437 512L426 512L424 509L421 508L420 507L424 503z"></path><path class="leaflet-interactive" stroke="#176b45" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="#53a875" fill-opacity="0.08" fill-rule="evenodd" d="M558 283L553 283L550 276L553 275L558 277L558 283z"></path><path class="leaflet-interactive" stroke="#176b45" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="#53a875" fill-opacity="0.08" fill-rule="evenodd" d="M425 501L430 496L425 485L425 478L429 474L435 477L439 487L442 488L446 486L453 478L461 477L464 475L470 467L494 468L492 460L492 462L491 460L490 463L488 460L495 457L496 458L498 456L495 453L492 455L493 454L483 452L486 444L488 444L489 435L491 436L491 432L484 430L482 416L479 409L473 405L463 406L450 392L440 389L433 377L421 371L419 359L421 356L422 348L425 347L429 349L433 342L433 338L436 334L436 330L428 327L434 313L419 300L409 295L393 278L373 263L354 251L337 244L332 240L323 229L323 226L314 209L316 208L310 198L308 197L304 178L307 177L303 155L310 153L307 144L308 143L311 150L314 168L316 168L317 173L317 181L314 188L313 198L317 205L319 205L329 212L329 214L342 233L345 242L358 252L360 251L369 255L371 251L372 255L376 258L387 263L400 272L405 272L407 270L403 265L396 262L388 256L384 249L386 237L384 231L368 211L370 201L372 201L373 163L360 137L362 127L356 125L356 123L352 121L339 108L335 99L330 95L330 92L324 87L320 79L323 64L327 56L332 55L332 53L336 57L334 70L334 80L336 85L348 99L348 104L379 138L380 149L385 159L384 185L386 191L384 200L386 203L386 210L392 216L393 223L401 233L405 233L413 229L413 226L415 224L417 228L420 229L419 236L417 236L418 242L425 252L433 256L436 260L445 261L451 266L453 266L456 270L467 274L474 280L478 281L485 289L489 288L495 282L501 267L508 257L509 248L506 242L510 244L529 267L541 275L554 294L558 314L554 321L557 325L558 323L558 327L560 323L564 321L566 314L570 308L568 302L585 274L583 274L583 270L585 268L584 265L590 258L592 252L590 246L592 240L600 239L605 242L611 250L612 249L613 231L617 221L615 209L618 209L628 213L638 225L647 229L658 237L674 242L688 252L699 263L710 270L722 270L739 267L755 268L768 280L776 284L792 297L794 302L794 311L797 318L804 325L809 333L804 338L794 337L788 340L785 344L783 355L779 361L775 382L773 385L772 400L769 400L768 404L774 407L772 418L756 424L757 426L752 429L751 428L740 432L736 435L736 443L717 449L699 466L699 470L685 475L677 480L678 481L674 484L675 486L672 487L675 492L674 493L676 498L672 500L673 501L670 502L670 504L667 506L660 508L664 519L652 524L642 514L639 517L634 516L631 518L632 520L627 522L636 534L620 542L605 523L606 522L599 510L596 508L598 507L596 504L589 497L593 493L587 484L578 491L576 489L574 491L569 485L563 491L555 489L555 486L547 487L548 491L535 491L531 488L531 490L527 490L524 493L526 493L524 499L523 498L523 503L525 504L519 517L503 517L501 515L492 514L490 516L478 516L472 518L468 516L468 513L457 513L457 511L455 511L454 514L451 513L450 515L440 516L437 512L426 512L424 509L421 508L420 507L424 503z"></path></g></svg></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-marker-pane"><div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" tabindex="0" role="button" style="margin-left: -12px; margin-top: -24px; width: 25px; height: 25px; transform: translate3d(500px, 414px, 0px); z-index: 414;"><div style="width:25px;height:25px;background:#d93025;border:2px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 4px #555;position:relative"><span style="position:absolute;left:7px;top:7px;width:7px;height:7px;background:white;border-radius:50%"></span></div></div><div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" tabindex="0" role="button" style="margin-left: -12px; margin-top: -24px; width: 25px; height: 25px; transform: translate3d(573px, 386px, 0px); z-index: 386;"><div style="width:25px;height:25px;background:#d93025;border:2px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 4px #555;position:relative"><span style="position:absolute;left:7px;top:7px;width:7px;height:7px;background:white;border-radius:50%"></span></div></div><div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" tabindex="0" role="button" style="margin-left: -12px; margin-top: -24px; width: 25px; height: 25px; transform: translate3d(754px, 335px, 0px); z-index: 335;"><div style="width:25px;height:25px;background:#d93025;border:2px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 4px #555;position:relative"><span style="position:absolute;left:7px;top:7px;width:7px;height:7px;background:white;border-radius:50%"></span></div></div></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(932575px, 411975px, 0px) scale(2048);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="file:///C:/Users/sukej/Downloads/ryugasaki_bouhan_map_rebuilt%20(1).html#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out" href="file:///C:/Users/sukej/Downloads/ryugasaki_bouhan_map_rebuilt%20(1).html#" title="Zoom out" role="button" aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> Tiles © Esri — Sources: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, and the GIS user community</div></div></div></div>
 <div class="map-title">龍ケ崎市 防犯マップ</div>
 <section id="listPanel" aria-label="投稿一覧">
@@ -115,12 +148,29 @@ const ryugasakiBoundary = {"type":"FeatureCollection","features":[{"type":"Featu
 const SUPABASE_URL = "https://ikirqcscvzgzesvhgwwy.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_cF_Vnw14hETFQcIFz3aRCw_KbH5-gaZ";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-let currentPins = []; // Supabase上の公開投稿
-let privatePins = []; // このブラウザだけに保存する非公開ピン
-try {
-  const savedPrivatePins = JSON.parse(localStorage.getItem("ryugasakiPrivatePins") || "[]");
-  privatePins = Array.isArray(savedPrivatePins) ? savedPrivatePins : [];
-} catch (e) { privatePins = []; }
+const SITE_URL = "https://sukejori-rgb.github.io/ryugasaki-bouhan-map/";
+let currentPins = [];
+let privatePins = [];
+let currentSession = null;
+let isMapAdmin = false;
+let appMode = "choose";
+function privateStorageKey() { return currentSession ? "ryugasakiPrivatePins_" + currentSession.user.id : null; }
+function loadPrivatePinsForUser() {
+  privatePins = [];
+  const key = privateStorageKey();
+  if (!key) return;
+  try {
+    let saved = localStorage.getItem(key);
+    const legacy = localStorage.getItem("ryugasakiPrivatePins");
+    if (saved === null && legacy) {
+      saved = legacy;
+      localStorage.setItem(key, legacy);
+      localStorage.removeItem("ryugasakiPrivatePins");
+    }
+    const parsed = JSON.parse(saved || "[]");
+    privatePins = Array.isArray(parsed) ? parsed : [];
+  } catch (e) { privatePins = []; }
+}
 
 const map = L.map("map", { minZoom: 10, maxZoom: 19 }).setView([35.9114, 140.1822], 13);
 L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
@@ -193,6 +243,13 @@ const listToggle = document.getElementById("listToggle");
 const locationStatus = document.getElementById("locationStatus");
 const formHeading = document.getElementById("formHeading");
 const statusText = document.getElementById("status");
+const authGate = document.getElementById("authGate");
+const authMessage = document.getElementById("authMessage");
+const termsCheckbox = document.getElementById("termsCheckbox");
+const githubLoginButton = document.getElementById("githubLogin");
+const guestContinueButton = document.getElementById("guestContinue");
+const accountBar = document.getElementById("accountBar");
+const accountLabel = document.getElementById("accountLabel");
 let selectedLocation = null;
 let editingId = null;
 const markers = new Map();
@@ -238,11 +295,13 @@ function readPins() { return currentPins; }
 function writePins(pins) { currentPins = pins; }
 function markerKey(pin) { return (pin.isPrivate ? "private-" : "public-") + String(pin.id); }
 function savePrivatePins() {
-  localStorage.setItem("ryugasakiPrivatePins", JSON.stringify(privatePins));
+  const key = privateStorageKey();
+  if (!key) throw new Error("ログインが必要です。");
+  localStorage.setItem(key, JSON.stringify(privatePins));
 }
 async function loadPins() {
   statusText.textContent = "Supabaseから投稿を読み込んでいます…";
-  const { data, error } = await supabaseClient.from("pins").select("id, category, lat, lng, title, description, created_at").order("created_at", { ascending: true });
+  const { data, error } = await supabaseClient.from("pins").select("id, category, lat, lng, title, description, created_at, user_id").order("created_at", { ascending: true });
   if (error) {
     console.error(error);
     statusText.textContent = "投稿の読み込みに失敗しました。SupabaseのURL・公開用キー・RLSポリシーを確認してください。";
@@ -251,7 +310,7 @@ async function loadPins() {
   }
   currentPins = (data || []).map(row => ({...row, id: String(row.id), lat: Number(row.lat), lng: Number(row.lng)}));
   redrawPins();
-  statusText.textContent = "「投稿する」は全体に公開、「ピンを打つ」はこのブラウザだけに保存します。";
+  statusText.textContent = currentSession ? "公開投稿と、このブラウザのログイン中アカウント用の自分専用ピンを利用できます。" : "閲覧モードです。投稿・編集・自分専用ピンにはログインしてください。";
 }
 function resetForm() {
   titleInput.value = "";
@@ -268,8 +327,9 @@ function markerPopup(pin) {
   return `<strong><span style="color:${categoryInfo[category].color}">●</span> ${escapeHtml(categoryInfo[category].label)}</strong>
     <div style="font-weight:bold;margin-top:4px">${escapeHtml(pin.title || "タイトルなし")}</div>
     <div style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:5px">${escapeHtml(pin.description || "")}</div>
+    ${(!pin.isPrivate && currentSession && (pin.user_id === currentSession.user.id || isMapAdmin)) || (pin.isPrivate && currentSession) ? `
     <button class="popup-btn" onclick="editPin('${String(pin.id).replace(/[^a-zA-Z0-9_-]/g, "")}')">編集</button>
-    <button class="popup-btn popup-delete" onclick="deletePin('${String(pin.id).replace(/[^a-zA-Z0-9_-]/g, "")}')">削除</button>`;
+    <button class="popup-btn popup-delete" onclick="deletePin('${String(pin.id).replace(/[^a-zA-Z0-9_-]/g, "")}')">削除</button>` : ""}`;
 }
 function drawPin(pin) {
   if (!Number.isFinite(pin.lat) || !Number.isFinite(pin.lng)) return;
@@ -304,13 +364,14 @@ function renderPinList(pins) {
 function redrawPins() {
   for (const marker of markers.values()) map.removeLayer(marker);
   markers.clear();
-  const pins = [...readPins().map(pin => ({...pin, isPrivate: false})), ...privatePins.map(pin => ({...pin, isPrivate: true}))];
+  const pins = [...readPins().map(pin => ({...pin, isPrivate: false})), ...(currentSession ? privatePins.map(pin => ({...pin, isPrivate: true})) : [])];
   for (const pin of pins) drawPin(pin);
   renderPinList(pins);
 }
 
 /* JSONの書き出し・読み込み機能は含めていません。 */
 map.on("click", event => {
+  if (!currentSession) { statusText.textContent = "閲覧モードです。ピンの追加にはGitHubログインが必要です。"; return; }
   const lat = event.latlng.lat, lng = event.latlng.lng;
   if (!pointInBoundary(lng, lat)) {
     alert("龍ケ崎市の市境内をクリックしてください。");
@@ -324,30 +385,33 @@ map.on("click", event => {
 });
 
 document.getElementById("savePin").addEventListener("click", async () => {
-  const title = titleInput.value.trim();
-  const description = descriptionInput.value.trim();
-  const category = categoryInput.value;
+  if (!currentSession) { alert("投稿するにはGitHubログインが必要です。"); return; }
+  const title = titleInput.value.trim(), description = descriptionInput.value.trim(), category = categoryInput.value;
   if (!title) { alert("タイトルを入力してください。"); titleInput.focus(); return; }
-  if (!selectedLocation) { alert("先に地図上で龍ケ崎市内の場所をクリックしてください。"); return; }
-  if (!pointInBoundary(selectedLocation.lng, selectedLocation.lat)) { alert("龍ケ崎市の市境内の場所を選んでください。"); return; }
-  if (editingId !== null) { alert("投稿の編集機能は、他人の投稿を勝手に変更できないよう、現在は無効にしています。今後、投稿者認証または管理者機能を追加して安全に実装できます。"); return; }
+  if (!selectedLocation || !pointInBoundary(selectedLocation.lng, selectedLocation.lat)) { alert("先に龍ケ崎市内の場所を地図上で選んでください。"); return; }
   const saveButton = document.getElementById("savePin");
   saveButton.disabled = true;
-  statusText.textContent = "Supabaseに投稿しています…";
-  const { error } = await supabaseClient.from("pins").insert({ title, description, category, lat: selectedLocation.lat, lng: selectedLocation.lng });
-  saveButton.disabled = false;
-  if (error) {
-    console.error(error);
-    statusText.textContent = "投稿に失敗しました。設定を確認してください。";
-    alert("投稿できませんでした。\n" + error.message);
-    return;
+  statusText.textContent = editingId !== null ? "投稿を更新しています…" : "Supabaseに投稿しています…";
+  let result;
+  if (String(editingId || "").startsWith("private:")) {
+    const localId = String(editingId).slice(8);
+    const local = privatePins.find(p => String(p.id) === localId);
+    if (!local) { saveButton.disabled = false; alert("自分専用ピンが見つかりません。"); return; }
+    Object.assign(local, {title, description, category, lat:selectedLocation.lat, lng:selectedLocation.lng});
+    try { savePrivatePins(); } catch(e) { saveButton.disabled = false; alert("自分専用ピンを保存できませんでした。"); return; }
+    result = {error:null};
+  } else if (editingId !== null) {
+    result = await supabaseClient.from("pins").update({title,description,category,lat:selectedLocation.lat,lng:selectedLocation.lng}).eq("id",editingId);
+  } else {
+    result = await supabaseClient.from("pins").insert({title,description,category,lat:selectedLocation.lat,lng:selectedLocation.lng,user_id:currentSession.user.id});
   }
-  await loadPins();
-  resetForm();
-  closePanel();
-  statusText.textContent = "投稿しました。Supabaseに保存され、ほかの利用者にも共有されます。";
+  saveButton.disabled = false;
+  if (result.error) { console.error(result.error); alert("保存できませんでした。\\n"+result.error.message); return; }
+  await loadPins(); resetForm(); closePanel();
+  statusText.textContent = "投稿を保存しました。";
 });
 document.getElementById("savePrivatePin").addEventListener("click", () => {
+  if (!currentSession) { alert("自分専用ピンを使うにはGitHubログインが必要です。"); return; }
   const title = titleInput.value.trim();
   const description = descriptionInput.value.trim();
   const category = categoryInput.value;
@@ -379,13 +443,83 @@ document.getElementById("cancelPin").addEventListener("click", () => {
   closePanel();
 });
 window.editPin = function(id) {
-  alert("安全のため、公開サイトからの投稿編集はまだ有効にしていません。投稿者認証または管理者機能を追加してから実装できます。");
+  if (!currentSession) return;
+  const pin = currentPins.find(p => String(p.id) === String(id));
+  if (pin) {
+    if (pin.user_id !== currentSession.user.id && !isMapAdmin) { alert("自分の投稿または管理者が管理できる投稿だけ編集できます。"); return; }
+    titleInput.value=pin.title||""; descriptionInput.value=pin.description||""; categoryInput.value=getCategory(pin);
+    selectedLocation={lat:Number(pin.lat),lng:Number(pin.lng)}; editingId=String(pin.id);
+    formHeading.textContent="公開投稿を編集"; locationStatus.textContent="投稿の位置を編集中です。"; openPanel(); return;
+  }
+  const local=privatePins.find(p=>String(p.id)===String(id));
+  if(local) {
+    titleInput.value=local.title||""; descriptionInput.value=local.description||""; categoryInput.value=getCategory(local);
+    selectedLocation={lat:Number(local.lat),lng:Number(local.lng)}; editingId="private:"+String(local.id);
+    formHeading.textContent="自分専用ピンを編集"; locationStatus.textContent="自分専用ピンの位置を編集中です。"; openPanel();
+  }
 };
-window.deletePin = function(id) {
-  alert("安全のため、公開サイトからの投稿削除はまだ有効にしていません。管理者機能を追加してから実装できます。");
+window.deletePin = async function(id) {
+  if (!currentSession) return;
+  const pin=currentPins.find(p=>String(p.id)===String(id));
+  if(pin) {
+    if(pin.user_id!==currentSession.user.id&&!isMapAdmin){alert("自分の投稿または管理者が管理できる投稿だけ削除できます。");return;}
+    if(!confirm("この公開投稿を削除しますか？"))return;
+    const {error}=await supabaseClient.from("pins").delete().eq("id",id);
+    if(error){alert("削除できませんでした。\\n"+error.message);return;}
+    await loadPins(); return;
+  }
+  const index=privatePins.findIndex(p=>String(p.id)===String(id));
+  if(index>=0&&confirm("この自分専用ピンを削除しますか？")){privatePins.splice(index,1);savePrivatePins();redrawPins();}
 };
-// ページを開いた時点で、Supabaseに保存された公開投稿を自動読み込み
-loadPins();
+function updateAccessUI() {
+  const logged=!!currentSession;
+  document.getElementById("formToggle").style.display=logged?"":"none";
+  document.getElementById("formPanel").style.display=logged?"":"none";
+  accountBar.style.display=logged?"flex":"none";
+  accountLabel.textContent=logged?"GitHubログイン中":"";
+  if(!logged){closePanel();privatePins=[];}
+  redrawPins();
+}
+async function enterLoggedInMode(session) {
+  currentSession=session; appMode="member"; loadPrivatePinsForUser();
+  const {data,error}=await supabaseClient.rpc("is_map_admin");
+  isMapAdmin=!error&&data===true;
+  if(error)console.warn("管理者判定を確認できませんでした。",error);
+  authGate.style.display="none"; updateAccessUI(); await loadPins();
+  statusText.textContent=isMapAdmin?"管理者としてログイン中です。公開投稿を管理できます。":"ログイン中です。自分の公開投稿と自分専用ピンを管理できます。";
+}
+function enterGuestMode() {
+  currentSession=null; isMapAdmin=false; appMode="guest"; privatePins=[];
+  authGate.style.display="none"; updateAccessUI(); loadPins();
+  statusText.textContent="閲覧モードです。公開投稿のみ表示しています。";
+}
+termsCheckbox.addEventListener("change",()=>{githubLoginButton.disabled=!termsCheckbox.checked;guestContinueButton.disabled=!termsCheckbox.checked;});
+githubLoginButton.addEventListener("click",async()=>{
+  if(!termsCheckbox.checked)return;
+  authMessage.textContent="GitHubの認証画面へ移動します…";
+  githubLoginButton.disabled=true;guestContinueButton.disabled=true;
+  const {error}=await supabaseClient.auth.signInWithOAuth({provider:"github",options:{redirectTo:SITE_URL}});
+  if(error){authMessage.textContent="ログインを開始できませんでした: "+error.message;githubLoginButton.disabled=false;guestContinueButton.disabled=false;}
+});
+guestContinueButton.addEventListener("click",()=>{if(termsCheckbox.checked)enterGuestMode();});
+document.getElementById("signOutButton").addEventListener("click",async()=>{
+  const {error}=await supabaseClient.auth.signOut();
+  if(error){alert("ログアウトできませんでした: "+error.message);return;}
+  currentSession=null;isMapAdmin=false;privatePins=[];authGate.style.display="flex";
+  termsCheckbox.checked=false;githubLoginButton.disabled=true;guestContinueButton.disabled=true;
+  authMessage.textContent="投稿・編集・自分専用ピンの利用にはログインが必要です。";
+  updateAccessUI();await loadPins();
+});
+supabaseClient.auth.onAuthStateChange((event,session)=>{
+  if(session) enterLoggedInMode(session);
+  else if(event==="SIGNED_OUT"){currentSession=null;isMapAdmin=false;authGate.style.display="flex";updateAccessUI();}
+});
+(async function initializeAuth(){
+  const {data,error}=await supabaseClient.auth.getSession();
+  if(error)console.warn("ログイン状態を確認できませんでした。",error);
+  if(data&&data.session)await enterLoggedInMode(data.session);
+  else {authGate.style.display="flex";updateAccessUI();}
+})();
 
 // RealtimeがSupabase側で有効な場合、新しい公開投稿を受け取ったら一覧・地図を更新
 // Realtime未設定でも、ページを開いた時点の自動読み込みと投稿後の再読み込みは動作します。
